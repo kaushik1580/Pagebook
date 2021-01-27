@@ -1,7 +1,7 @@
 <template>
     <div class="ad" style="float: right" >
         <div v-for="items in ads" :key="items.id">
-            <v-img class="adimg" max-height="300" max-width="300"
+            <v-img @click="send(items.userId)" class="adimg" max-height="300" max-width="300"
                 :src="items.imageUrl" style="margin:35px;margin-left:600px"></v-img>
                 <!-- <br> -->
                 <!-- <b><h5>{{items.title}}</h5></b>
@@ -22,10 +22,33 @@ export default {
     data(){
         return{
             userId: jwtdecode(localStorage.getItem("token")).userId,
+            userName: jwtdecode(localStorage.getItem("token")).username,
             ads: [],
-            user: {}
-            
+            user: {},
+            crmData: {
+                "leadID": "",
+                "leadName": "",
+                "leadType": 0,
+                "businessID": ""
+            }
             // stories: undefined,
+        }
+    },
+    methods: {
+        send(id){
+            if(id === -1){
+                console.log("Do nothing")
+            }else{
+                this.crmData.leadID = this.userId
+                this.crmData.leadName = this.userName
+                this.crmData.leadType = 0,
+                this.crmData.businessID = id
+                console.log(this.crmData)
+                Vue.axios.post(`http://10.177.1.116:8001/lead/0/`, this.crmData)
+                    .then((resp) => {
+                        console.log(resp.data)
+                })
+            }
         }
     },
     // mounted() {

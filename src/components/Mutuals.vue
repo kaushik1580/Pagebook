@@ -7,11 +7,9 @@
         <img :src="mutual.profileImage">
       </v-avatar>
     </v-row>
-    <router-link to="/np">
-      <v-card-title class="text" style="font-size:15px;text-align:center;margin-left:150px">
+      <v-card-title @click="toProfile(mutual.userId)" class="text" style="font-size:15px;text-align:center;margin-left:150px">
         {{mutual.userName}}
         </v-card-title>
-    </router-link>
     </v-card>
 </div>
 </template>
@@ -29,6 +27,14 @@ export default {
             userId: jwtdecode(localStorage.getItem("token")).userId,
             mutuals: undefined,
         }
+    },
+    methods: {
+        toProfile(id){
+            console.log(id)
+            this.$store.state.friendId = id
+            console.log(id)
+            this.$router.push(this.$router.push({path: `/np/`}))
+        },
     },
     mounted() {
         const uid = this.userId
