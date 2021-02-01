@@ -3,7 +3,7 @@
     <v-card v-for="mutual in mutuals" :key="mutual.userId" elevation="100" justify="center" outlined max-width="1200" height="160" style="width:400px;margin-top:200px;float:left;margin-left:20px;">
         <h4 style="text-align:center">People you may know</h4>
       <v-row justify="center">
-      <v-avatar size= 80 style="height:70px;margin-top:20px; min-width: 80px; width: 80px;">
+      <v-avatar @click="toPost(post.postDTO.postId)" size= 80 style="height:70px;margin-top:20px; min-width: 80px; width: 80px;">
         <img :src="mutual.profileImage">
       </v-avatar>
     </v-row>

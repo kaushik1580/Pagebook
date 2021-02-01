@@ -1,12 +1,12 @@
 <template>
 <div>
-    <v-card  class="frnd" elevation="100" justify="center" outlined max-width="8000" v-for="request in requests" :key="request.requestId">
+    <v-card @click="toProfile(request.userId)" class="frnd" elevation="100" justify="center" outlined max-width="8000" v-for="request in requests" :key="request.requestId">
       <v-row justify="center">
       <v-avatar size= 100>
         <img :src="request.profileImage" alt="John" class="img">
       </v-avatar>
     </v-row>
-      <v-card-title @click="toProfile(request.userId)" class="ma-4">
+      <v-card-title class="ma-4">
         {{request.userName}}
         </v-card-title>
        <!-- <v-btn class="ma-4" color="#f95e49" dark @click="func(1, request)">
@@ -45,7 +45,7 @@ export default {
   mounted(){
     const uid = this.userId
     console.log(uid)
-    Vue.axios.get(`http://10.177.1.179:7081/pb/user/getFriendRequests/${uid}`)
+    Vue.axios.get(`http://10.177.1.179:7081/pb/user/pagesManaged/${uid}`)
       .then((resp) => {
         console.log(resp.data)
         this.requests = resp.data

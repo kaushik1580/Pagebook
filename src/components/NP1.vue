@@ -13,14 +13,14 @@
                 BIO- {{userData.bio}}
             </v-list-item-title>
             <v-card-actions>
-                <v-btn class="follow" @click="addFriend" rounded color="#f95e49" v-if="!this.userData.isFriend">
+                <v-btn class="follow" @click="addFriend" rounded color="#f95e49" v-if="!(this.userData.isFriend || this.userData.isModerator)">
                     Follow
                 </v-btn>
                 <v-btn class="follow" rounded color="#f95e49" v-if="this.userData.isFriend">
                     Following
                 </v-btn>
                 <div v-if="this.userData.isModerator">
-                    <AddPost/>
+                    <AddPost1/>
                 </div>
         </v-card-actions>
             </v-list-item-content>
@@ -29,15 +29,13 @@
             <img :src="userData.profileImage" />
             </v-list-item-avatar>
         </v-list-item>
-        <router-link to="/friends">
-        <v-card-title>Followers</v-card-title></router-link>
+        <v-card-title>Followers</v-card-title>
         <v-card-text>
             <v-chip-group column >
             <v-chip>{{userData.followerCount}}</v-chip>
             </v-chip-group>
         </v-card-text>
-        <router-link to="/followings">
-        <v-card-title>Followings</v-card-title></router-link>
+        <v-card-title>Followings</v-card-title>
         <v-card-text>
             <v-chip-group column >
             <v-chip>{{userData.followingCount}}</v-chip>
@@ -54,12 +52,12 @@ import VueAxios from 'vue-axios'
 import jwtdecode from 'jwt-decode'
 Vue.use(VueAxios, axios);
 
-import AddPost from '../components/AddPost'
+import AddPost1 from '../components/AddPost1.vue'
 
 export default {
     name: "NP1",
     components: {
-        AddPost
+        AddPost1
     },
     data(){
         return{

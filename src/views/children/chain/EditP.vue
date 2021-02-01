@@ -18,9 +18,9 @@
            <!-- <v-btn rounded  color="#f95e49">Upload</v-btn>--> </v-form> 
         </v-row>
         <v-card-actions>
-        <v-btn @click="edit" outlined rounded text>
+       <router-link to="/profile"> <v-btn @click="edit" outlined rounded text>
           Submit
-        </v-btn>
+        </v-btn></router-link>
         </v-card-actions>
       </v-container>
     </v-form>

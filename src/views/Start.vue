@@ -16,9 +16,9 @@
           <v-divider></v-divider>
           <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" @click="goToHome"> <v-icon style="margin-right:10px">mdi-home</v-icon>HOME</v-btn>
           <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" @click="goToProfile"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>PROFILE</v-btn>
-            <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" @click="goToNotification"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>NOTIFICATION</v-btn>
+            <!-- <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" @click="goToNotification"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>NOTIFI CATION</v-btn> -->
             <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" @click="goToRequest"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>FRIEND REQUEST</v-btn>
-            <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" v-if="this.userdetails.type == 2"  @click="goToBusiness"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>BUSINESS</v-btn>
+            <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" v-if="!(this.userdetails.type == 3)"  @click="goToBusiness"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>BUSINESS</v-btn>
             <v-btn style="display:block;margin:20px;width:220px;color:white" color="#006499" v-if="this.userdetails.type == 3" @click="goToModerator"><i class="fa fa-users" aria-hidden="true" style="margin-right:10px"></i>MODERATOR</v-btn>
            <v-divider></v-divider>
           

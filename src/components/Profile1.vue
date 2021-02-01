@@ -2,14 +2,15 @@
     <div>
         <v-card class="mx-auto" max-width="5000" outlined>
         <v-list-item three-line>
-            <v-list-item-content>
-            <v-list-item-title class="headline mb-1">
-                {{userData.username}}
+            <v-list-item-content class="content">
+            <v-list-item-title>
+                <h3>{{userData.username}}</h3>
             </v-list-item-title>
-            <v-list-item-title class="headline mb-1">
+            <hr style="width:10px;">
+            <v-list-item-title class="content">
                 DOB - {{userData.dateOfBirth}}
             </v-list-item-title>
-            <v-list-item-title class="headline mb-1">
+            <v-list-item-title class="content">
                 BIO- {{userData.bio}}
             </v-list-item-title>
             <v-card-actions>
@@ -67,3 +68,12 @@ export default {
     }
 }
 </script>
+<style>
+.mx-auto{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.content{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+</style> 

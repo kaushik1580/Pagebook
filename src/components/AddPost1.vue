@@ -2,19 +2,25 @@
     <div>
         <v-dialog width="500">
         <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" color="#006499">
-        Add story
+        <v-btn v-bind="attrs" v-on="on" color="#006499" style="margin:20px">
+        Add post
         </v-btn>
         </template>
         <v-card>
         <v-card-title>
-        <h2>Add a new story</h2>
+        <h2>Add a new Post</h2>
         </v-card-title>
         <v-card-text>
-        <v-form class="px-3" ref="form" @submit="postStory" method="post">
+        <v-form class="px-3" ref="form" @submit="postData" method="post">
+        <v-textarea v-model="posts.postText" label="Content"></v-textarea>
         <input type="file" @change="previewImage" accept="image/*" >
+        <v-row align="center">
+        <v-col class="d-flex" cols="12" sm="6">
+        <v-select :items="items" label="Categories" v-model="posts.postCategory"></v-select>
+        </v-col>
+        </v-row>
         <v-spacer></v-spacer>
-       <v-btn rounded type="submit" color="#006499">Add Story</v-btn>
+        <v-btn rounded type="submit" color="#006499">Add Post</v-btn>
         </v-form>
         </v-card-text>
         </v-card>
@@ -30,7 +36,7 @@ import VueAxios from 'vue-axios'
 import jwtdecode from 'jwt-decode'
 Vue.use(VueAxios, axios);
 export default {
-    name: "AddStory",
+    name: "AddPost1",
     data(){
         return{
             imageData: null,
@@ -38,9 +44,15 @@ export default {
             picture: null,
             uploadValue: 0,
             userId: jwtdecode(localStorage.getItem("token")).userId,
-            story_data: {
-                'userId': this.userId,
-                'storyUrl': []
+            items: ['General', 'Sports', 'Fashion', 'Automobile', 'Food', 'Education'],
+            posts: {
+                "userId" :this.userId,
+                "postText" : "",
+                "postUrl" : "",
+                "postType" : 1,
+                "postCategory" : "General",
+                "timestamp" : 1234567891,
+                "sharedPostId" : null
             },
         }
     },
@@ -61,19 +73,25 @@ export default {
       ()=>{this.uploadValue=100;
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
-          this.story_data.storyUrl.push(url);
-         console.log(this.story_data.storyUrl);
+          this.posts.postUrl = url;
+         console.log(this.posts.postUrl);
         });
       }
       );
     },
-    postStory (e) {
-        // console.log(this.story_data)
-        this.story_data.userId = this.userId
-        let data=this.story_data;
-
-        console.log(data)
-        Vue.axios.post('http://10.177.1.69:8081/pb/story/addStory', data)
+    postData (e) {
+        this.posts.timestamp = Date.now()
+        this.posts.userId = this.$store.state.friendId
+        if(this.posts.postUrl !== ""){
+        this.posts.postType = 1
+        }
+        else{
+        this.posts.postType = 2
+        }
+        console.log(this.posts)
+        let data=this.posts;
+        console.log("URLlllllscsd hcgsdvcdkghvkshfgvkhdfgcvkahds"+this.posts.postUrl)
+        Vue.axios.post('http://10.177.1.69:8081/pb/post/addPost', data)
         .then((resp) => {
         console.log(resp.data)
         // if (resp.data) {
@@ -81,7 +99,7 @@ export default {
         // }
         })
         .catch(function (error){
-            console.log(error);
+        console.log(error);
         });
         e.preventDefault();
     },

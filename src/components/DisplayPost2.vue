@@ -2,7 +2,7 @@
      <div class="post" style="float:left">
          <h1 v-if="userData.type === 2 && !userData.isFriend">This Profile is Private</h1>
         <v-card class="" max-width="1000" style="margin:0px 0px 20px 0px" outlined v-for="(post,index) in displayPosts" :key="post.userId">
-        <v-img height="200" :src="post.postDTO.postUrl" float="right"></v-img>
+        <v-img @click="toPost(post.postDTO.postId)" height="400" :src="post.postDTO.postUrl" float="right"></v-img>
         <v-card-title>{{post.postDTO.userDTO.userName}}</v-card-title>
         <v-card-text>
         <v-row align="center" class="mx-5">
@@ -25,7 +25,7 @@
         <div>
         <v-dialog width="500">
         <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" class="red lighten-1" style="margin:20px">
+        <v-btn v-bind="attrs" v-on="on" color="#006499" style="margin:20px">
         Add Comment
         </v-btn>
         </template>
@@ -37,7 +37,7 @@
         <v-form class="px-3" ref="form">
         <v-textarea v-model="add_comment.commentText" label="Content"></v-textarea>
         <v-spacer></v-spacer>
-        <v-btn rounded  @click="postComment(post.postDTO.postId)" class="success mx-0 mt-3">Submit</v-btn>
+        <v-btn rounded  @click="postComment(post.postDTO.postId)" color="#006499">Submit</v-btn>
         </v-form>
         </v-card-text>
         </v-card>

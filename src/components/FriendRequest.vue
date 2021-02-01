@@ -2,7 +2,7 @@
     <div style="margin-right:200px">
         <v-card  class="frnd" elevation="100" justify="center" outlined max-width="8000" v-for="request in requests" :key="request.requestId">
         <v-row justify="center">
-        <v-avatar size= 100>
+        <v-avatar @click="toPost(post.postDTO.postId)" size= 100>
             <img :src="request.profileImage" alt="John" class="img">
         </v-avatar>
         </v-row>

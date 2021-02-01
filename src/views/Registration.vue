@@ -25,7 +25,7 @@
                       <input type="password" class="form-control" name="password" v-model="posts.password" placeholder="Password" id="password" maxlength="100" required/>
                     </div>
                     <div class="form-group form-primary">
-                      <input type="number" class="form-control" name="mobileNumber" v-model="posts.mobileNumber" placeholder="Mobile Number" id="mobilenumber" maxlength="10" required/>
+                      <input type="tel" class="form-control" name="mobileNumber" v-model="posts.mobileNumber" placeholder="Mobile Number" id="mobilenumber" maxlength="10" required/>
                     </div>
                     <div class="form-group form-primary">
                       <input type="text" class="form-control" name="dateOfBirth" v-model="posts.dateOfBirth" placeholder="DOB- DD/MM/YYYY" id="dateOfBirth" maxlength="20" required/>
@@ -63,7 +63,7 @@
                     </div>
                     <p class="text-inverse text-center">
                       Already have an account?
-                      <router-link class="nav-item" to="/login">Login</router-link>
+                      <router-link class="nav-item" to="/home">Login</router-link>
                     </p>
                   </div>
                 </div>
@@ -128,6 +128,7 @@ export default {
       }
       );
     },
+
     postData () {
       let data = this.posts;
       console.log(this.posts)

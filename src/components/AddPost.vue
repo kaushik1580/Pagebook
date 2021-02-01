@@ -14,6 +14,7 @@
         <v-form class="px-3" ref="form" @submit="postData" method="post">
         <v-textarea v-model="posts.postText" label="Content"></v-textarea>
         <input type="file" @change="previewImage" accept="image/*" >
+        <!-- <input type="file" @change="previewVideo" accept="video/mp4,video/x-m4v,video/*" > -->
         <v-row align="center">
         <v-col class="d-flex" cols="12" sm="6">
         <v-select :items="items" label="Categories" v-model="posts.postCategory"></v-select>
@@ -49,7 +50,7 @@ export default {
                 "userId" :this.userId,
                 "postText" : "",
                 "postUrl" : "",
-                "postType" : 1,
+                "postType" : "",
                 "postCategory" : "General",
                 "timestamp" : 1234567891,
                 "sharedPostId" : null
@@ -64,6 +65,13 @@ export default {
       console.log(this.imageData)
       this.onUpload();
     },
+    previewVideo(event) {
+      this.uploadValue=0;
+      this.picture=null;
+      this.imageData = event.target.files[0];
+      console.log(this.imageData)
+      this.onUploadVideo();
+    },
     onUpload(){
       this.picture=null;
       const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
@@ -74,7 +82,24 @@ export default {
         storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.picture =url;
           this.posts.postUrl = url;
+          this.posts.postType = 2;
          console.log(this.posts.postUrl);
+        });
+      }
+      );
+    },
+    onUploadVideo(){
+      this.picture=null;
+      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+        storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+          this.picture =url;
+          this.posts.postUrl = url;
+          this.posts.postType = 3;
+         console.log("in video" + this.posts.postUrl);
         });
       }
       );
@@ -82,12 +107,12 @@ export default {
     postData (e) {
         this.posts.timestamp = Date.now()
         this.posts.userId = this.userId
-        if(this.posts.postUrl !== ""){
-        this.posts.postType = 1
-        }
-        else{
-        this.posts.postType = 2
-        }
+        // if(this.posts.postUrl !== ""){
+        // this.posts.postType = 1
+        // }
+        // else{
+        // this.posts.postType = 2
+        // }
         console.log(this.posts)
         let data=this.posts;
         console.log("URLlllllscsd hcgsdvcdkghvkshfgvkhdfgcvkahds"+this.posts.postUrl)

@@ -2,12 +2,12 @@
 <div>
   <h2 class="bus" >MODERATOR PROFILES</h2>
   
-    <v-text-field class="red lighten-4--text" v-model="val" dark hide-details single-line style="float:left;width:500px;margin:10px 10px 10px 350px"></v-text-field>
+    <v-text-field class="blue lighten-4--text" dark hide-details single-line v-model="val" style="float:left;width:500px;margin:10px 10px 10px 350px;border:1px solid #006499;"></v-text-field>
       <v-btn icon @click="submit">
         <v-icon style="color:black;height:200px">mdi-magnify</v-icon>
       </v-btn>
   
-    <v-card  class="frnd" elevation="100" justify="center" outlined max-width="8000" v-for="res in results" :key="res.userId">
+    <v-card  class="frnd" elevation="100" justify="center" outlined max-width="7500" v-for="res in results" :key="res.userId">
       <v-row justify="center">
       <v-avatar size= 100>
         <img :src="res.profileImage" alt="John" class="img">
@@ -16,7 +16,7 @@
       <v-card-title class="text" style="">
         {{res.userName}}
         </v-card-title>
-    <v-btn class="follow" rounded color="#f95e49" @click="remove(res.userId)">
+    <v-btn class="follow" rounded color="#006499" @click="remove(res.userId)">
         REMOVE
       </v-btn>
     </v-card>
@@ -83,11 +83,11 @@ export default {
 .frnd{
   margin-top: 50px;
   width: 500px;
-  margin-left: 42%;
+  margin-left: 40%;
 }
 .bus{
   text-align:center;
-  margin-left: 360px;
+  margin-left: 300px;
   margin-top: 20px;
 
 }

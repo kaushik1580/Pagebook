@@ -6,7 +6,7 @@
         <v-card-text>
         <v-row align="center" class="mx-5">
         </v-row>
-        <div @click="toPost(post.postDTO.postId)">{{post.postDTO.postText}}</div>
+        <div>{{post.postDTO.postText}}</div>
         <div @click="toPost(post.postDTO.postId)"><h6> {{post.postDTO.timestamp}} </h6> </div>
         </v-card-text>
         <v-divider class="mx-4"></v-divider>

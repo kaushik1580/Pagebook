@@ -1,8 +1,8 @@
 <template>
      <div class="post" style="float:left">
-        <v-card class="" max-width="1000" style="margin:0px 0px 20px 0px" outlined v-for="(post,index) in displayPosts" :key="post.userId">
-        <v-img height="200" :src="post.postDTO.postUrl" float="right"></v-img>
-        <v-card-title>{{post.postDTO.userDTO.username}}</v-card-title>
+        <v-card class="" max-width="2000" style="margin:0px 0px 20px 0px" outlined v-for="(post,index) in displayPosts" :key="post.userId">
+        <v-img  @click="toPost(post.postDTO.postId)" height="400" max-width="1000" :src="post.postDTO.postUrl" float="right"></v-img>
+        <v-card-title>{{post.postDTO.userDTO.userName}}</v-card-title>
         <v-card-text>
         <v-row align="center" class="mx-5">
         </v-row>
